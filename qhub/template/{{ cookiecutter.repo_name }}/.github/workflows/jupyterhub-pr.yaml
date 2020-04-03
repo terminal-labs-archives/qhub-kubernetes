@@ -1,0 +1,60 @@
+name: "Jupyterhub Infrastructure - Pull Request"
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "infrastructure/**"
+      - ".github/workflows/jupyterhub.yaml"
+
+{% raw %}
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+{% endraw %}
+
+jobs:
+  terraform-plan:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Infastructure'
+        uses: actions/checkout@master
+      - name: 'Checkout Terraform Modules'
+        run: |
+          mkdir -p $HOME/.ssh
+          echo "$infastructure_key" > $HOME/.ssh/id_rsa
+          chmod 400 $HOME/.ssh/id_rsa
+          git clone --depth=1 $repository infrastructure/quansight-terraform-modules
+        env:
+          infastructure_key: {{ '${{ secrets.quansight_infrastructure_key }}' }}
+          repository: 'git@github.com:Quansight/quansight-terraform-modules.git'
+      - name: 'Terraform Format'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.23
+          tf_actions_subcommand: 'fmt'
+          tf_actions_working_dir: 'infrastructure'
+      - name: 'Terraform Init'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.23
+          tf_actions_subcommand: 'init'
+          tf_actions_working_dir: 'infrastructure'
+      - name: 'Terraform Validate'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.23
+          tf_actions_subcommand: 'validate'
+          tf_actions_working_dir: 'infrastructure'
+          tf_actions_comment: true
+      - name: 'Terraform Plan'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.23
+          tf_actions_subcommand: 'plan'
+          tf_actions_working_dir: 'infrastructure'
+          tf_actions_comment: true

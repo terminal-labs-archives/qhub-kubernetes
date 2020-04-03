@@ -1,0 +1,33 @@
+#!/bin/bash
+set -euo pipefail
+
+# Install some classic notebook extensions
+jupyter nbextension enable --py widgetsnbextension --sys-prefix
+jupyter serverextension enable --sys-prefix jupyter_server_proxy
+
+# Install some JupyterLab extensions
+jupyter labextension install \
+    @jupyter-widgets/jupyterlab-manager \
+    @pyviz/jupyterlab_pyviz \
+    @ryantam626/jupyterlab_code_formatter \
+    jupyterlab-cpustatus \
+    jupyterlab-s3-browser \
+    --no-build --debug
+
+# This sets up jupyterlab-git, the lab extension will be built with jupyter lab build later
+pip install --no-cache-dir \
+    jupyterlab-git \
+    jupyterlab-s3-browser
+
+jupyter lab build --dev-build=False --debug
+npm cache clean --force
+
+# Install Jupyter extensions
+jupyter serverextension enable --py \
+    jupyterlab_s3_browser \
+    jupyterlab_code_formatter
+
+# Allow users to keep custom environments in $HOME/envs
+# We don't set this in the dockerfile, since we want our base environment
+# to be installed in /opt
+conda config --system --append envs_dirs /home/${NB_USER}/envs

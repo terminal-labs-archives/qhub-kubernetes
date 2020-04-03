@@ -1,0 +1,24 @@
+auth:
+  type: github
+  github:
+    clientId: "b98f8b4ca60373d82745"
+    clientSecret: "6967a34ee611da8727105b14f6037cae168f5bd1"
+    callbackUrl: "https://{{ cookiecutter.endpoint }}/hub/oauth_callback"
+  admin:
+    access: true
+    users:
+      - costrouc
+  whitelist:
+    users:
+      - dharhas
+      - anirrudh
+
+hub:
+  extraConfig:
+    01-jupyterlab: |
+      c.Spawner.cmd = ['conda', 'run', '-n', 'default', 'jupyter-labhub']
+
+cull:
+  enabled: true
+  timeout: 1800 # cull after 30min of inactivity
+  every: 600

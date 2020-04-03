@@ -1,0 +1,13 @@
+locales
+bzip2
+procps
+
+# development utilities
+build-essential git
+
+# linux utilities
+tmux ffmpeg htop openssh-client
+wget curl
+
+# editors
+nano

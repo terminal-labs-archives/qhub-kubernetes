@@ -1,0 +1,50 @@
+name: default
+channels:
+  - conda-forge
+dependencies:
+  - python >=3.7, <=3.8
+  - ipython > 7
+  - pip
+  # jupyterhub/jupyterlab
+  - nb_conda_kernels
+  - jupyter-server-proxy
+  - ipywidgets
+  - jupyterlab < 2.0
+  - jupyter_client < 6.0
+  - jupyter_console
+  - jupyterhub
+  - nodejs
+  - nbconvert
+  # dask
+  - dask
+  - distributed
+  - dask-gateway
+  # numerical
+  - numba
+  - numpy
+  - pandas
+  # s3 utits
+  - s3fs
+  - boto3
+  # viz tools
+  - panel
+  - param
+  - python-graphviz
+  # testing, docs, linting
+  - pytest
+  - hypothesis
+  - importnb
+  - nbval
+  - flake8
+  - sphinx
+  - pytest-cov
+  - black
+  - isort
+  - jupyterlab_code_formatter
+  - pip:
+    - pydocstyle
+    - pycodestyle
+    - pylama
+    - bandit
+    - mypy
+    - yapf

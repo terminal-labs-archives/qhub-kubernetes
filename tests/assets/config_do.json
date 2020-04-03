@@ -1,0 +1,29 @@
+{
+    "repo_name": "do-deployment",
+    "project_name": "do-jupyterhub",
+    "provider": "do",
+    "ci_cd": "github-actions",
+    "endpoint": "jupyter.do.qhub.quansight.services",
+
+    "digital_ocean": {
+        "region": "nyc3",
+        "kubernetes_version": "1.16.6-do.2",
+        "node_groups": {
+            "general": {
+                "instance": "s-1vcpu-2gb",
+                "min_nodes": 2,
+                "max_nodes": 2
+            },
+            "user": {
+                "instance": "s-1vcpu-2gb",
+                "min_nodes": 2,
+                "max_nodes": 2
+            },
+            "worker": {
+                "instance": "s-1vcpu-2gb",
+                "min_nodes": 0,
+                "max_nodes": 2
+            }
+        }
+    }
+}
