@@ -15,6 +15,7 @@ jobs:
     steps:
       - name: 'Checkout Image'
         uses: actions/checkout@master
+{% if cookiecutter.provider == "aws" %}
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -24,14 +25,44 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-      - name: Build, tag, and push image to Amazon ECR
+{% elif cookiecutter.provider == "gcp" %}
+      - name: Configure GCP Credentials
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: '270.0.0'
+          service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      - name: 'Add GCP Credentials'
+        run: |
+          echo "$gcp_credentials" > gcp-infrastructure/account.json
+          gcloud auth activate-service-account --key-file=gcp-infrastructure/account.json
         env:
-          ECR_REGISTRY: {{ '${{ steps.login-ecr.outputs.registry }}' }}
-          ECR_REPOSITORY: crowdsmart-jupyterhub-dev-jupyterlab
+          gcp_credentials: ${{ secrets.gcp_credentials }}
+      - run: |
+          gcloud auth configure-docker
+{% endif %}
+      - name: Docker Build, Tag, and Push Image
+        env:
+{% if cookiecutter.provider == "aws" %}
+          IMAGE_NAME: {{ '${{ steps.login-ecr.outputs.registry }}/crowdsmart-jupyterhub-dev-jupyterlab' }}
+{% elif cookiecutter.provider == "gcp" %}
+          IMAGE_NAME: {{ 'gcr.io/$GCP_PROJECT/$GCP_REPOSITORY' }}
+{% elif cookiecutter.provider == "do" %}
+          IMAGE_NAME: 'quansight/qhub'
+{% endif %}
           IMAGE_TAG: {{' ${{ github.sha }}' }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG image
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker build -t $IMAGE_NAME:$IMAGE_TAG image
+          docker push $IMAGE_NAME:$IMAGE_TAG
+{% if cookiecutter.provider == "aws" %}
       - name: Logout of Amazon ECR
         if: always()
         run: docker logout {{ '${{ steps.login-ecr.outputs.registry }}' }}
+{% elif cookiecutter.provider == "gcp" %}
+    - name: Docker Logout
+        run: |
+          docker logout
+{% elif cookiecutter.provider == "do" %}
+    - name: Docker Logout
+        run: |
+          docker logout
+{% endif %}
