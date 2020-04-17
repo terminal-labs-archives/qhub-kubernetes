@@ -7,12 +7,12 @@ provider "google" {
 
 
 module "registry-jupyterhub" {
-  source = "../../quansight-terraform-modules/modules/gcp/registry"
+  source = "github.com/quansight/qhub-terraform-modules//modules/gcp/registry"
 }
 
 
 module "kubernetes" {
-  source = "../../quansight-terraform-modules/modules/gcp/kubernetes"
+  source = "github.com/quansight/qhub-terraform-modules//modules/gcp/kubernetes"
 
   name     = local.cluster_name
   location = var.region

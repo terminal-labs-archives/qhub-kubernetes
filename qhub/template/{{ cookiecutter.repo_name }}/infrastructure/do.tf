@@ -2,7 +2,7 @@ provider "digitalocean" {}
 
 
 module "kubernetes" {
-  source = "../../quansight-terraform-modules/modules/digitalocean/kubernetes"
+  source = "github.com/quansight/qhub-terraform-modules//modules/digitalocean/kubernetes"
 
   name = local.cluster_name
 

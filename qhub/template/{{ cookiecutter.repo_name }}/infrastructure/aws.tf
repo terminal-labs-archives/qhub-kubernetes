@@ -5,7 +5,7 @@ provider "aws" {
 
 # ==================== ACCOUNTING ======================
 module "accounting" {
-  source = "../../quansight-terraform-modules/modules/aws/accounting"
+  source = "github.com/quansight/qhub-terraform-modules//modules/aws/accounting"
 
   project     = var.name
   environment = var.environment
@@ -14,7 +14,7 @@ module "accounting" {
 
 # ======================= NETWORK ======================
 module "network" {
-  source = "../../quansight-terraform-modules/modules/aws/network"
+  source = "github.com/quansight/qhub-terraform-modules//modules/aws/network"
 
   name = local.cluster_name
 
@@ -39,7 +39,7 @@ module "network" {
 
 # ==================== REGISTRIES =====================
 module "registry-jupyterlab" {
-  source = "../../quansight-terraform-modules/modules/aws/registry"
+  source = "github.com/quansight/qhub-terraform-modules//modules/aws/registry"
 
   name = "${local.cluster_name}-jupyterlab"
   tags = local.additional_tags
@@ -48,7 +48,7 @@ module "registry-jupyterlab" {
 
 # ====================== EFS =========================
 module "efs" {
-  source = "../../quansight-terraform-modules/modules/aws/efs"
+  source = "github.com/quansight/qhub-terraform-modules//modules/aws/efs"
 
   name = "${local.cluster_name}-jupyterhub-shared"
   tags = local.additional_tags
@@ -60,7 +60,7 @@ module "efs" {
 
 # ==================== KUBERNETES =====================
 module "kubernetes" {
-  source = "../../quansight-terraform-modules/modules/aws/kubernetes"
+  source = "github.com/quansight/qhub-terraform-modules//modules/aws/kubernetes"
 
   name = local.cluster_name
   tags = local.additional_tags

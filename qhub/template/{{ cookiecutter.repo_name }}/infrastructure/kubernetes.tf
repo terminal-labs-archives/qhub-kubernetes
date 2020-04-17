@@ -6,7 +6,7 @@ provider "kubernetes" {
 }
 
 module "kubernetes-initialization" {
-  source = "../../quansight-terraform-modules/modules/kubernetes/initialization"
+  source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/initialization"
 
   namespace = var.environment
   secrets   = []
@@ -15,7 +15,7 @@ module "kubernetes-initialization" {
 
 {% if cookiecutter.provider == "aws" -%}
 module "kubernetes-nfs-mount" {
-  source = "../../quansight-terraform-modules/modules/kubernetes/nfs-mount"
+  source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/nfs-mount"
 
   name         = "nfs-mount"
   namespace    = var.environment
@@ -24,7 +24,7 @@ module "kubernetes-nfs-mount" {
 }
 {% else -%}
 module "kubernetes-nfs-server" {
-  source = "../../quansight-terraform-modules/modules/kubernetes/nfs-server"
+  source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/nfs-server"
 
   name         = "nfs-server"
   namespace    = var.environment
@@ -32,7 +32,7 @@ module "kubernetes-nfs-server" {
 }
 
 module "kubernetes-nfs-mount" {
-  source = "../../quansight-terraform-modules/modules/kubernetes/nfs-mount"
+  source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/nfs-mount"
 
   name         = "nfs-mount"
   namespace    = var.environment
@@ -53,7 +53,7 @@ provider "helm" {
 
 {% if cookiecutter.provider == "aws" -%}
 module "kubernetes-autoscaling" {
-  source = "../../quansight-terraform-modules/modules/kubernetes/services/cluster-autoscaler"
+  source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/services/cluster-autoscaler"
 
   namespace = var.environment
 
@@ -63,7 +63,7 @@ module "kubernetes-autoscaling" {
 {% endif -%}
 
 module "kubernetes-ingress" {
-  source = "../../quansight-terraform-modules/modules/kubernetes/ingress"
+  source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/ingress"
 
   namespace = var.environment
 
@@ -71,7 +71,7 @@ module "kubernetes-ingress" {
 }
 
 module "qhub" {
-  source = "../../quansight-terraform-modules/modules/kubernetes/services/meta/qhub"
+  source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/services/meta/qhub"
 
   name      = "qhub"
   namespace = var.environment
