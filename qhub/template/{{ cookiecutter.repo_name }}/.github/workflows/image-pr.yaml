@@ -9,7 +9,7 @@ on:
       - ".github/workflows/image-pr.yaml"
 
 jobs:
-  build:
+  jupyterlab:
     name:
     runs-on: ubuntu-latest
     steps:
@@ -19,4 +19,28 @@ jobs:
         env:
           IMAGE_TAG: {{ '${{ github.sha }}' }}
         run: |
-          docker build -t qhub:$IMAGE_TAG image
+          docker build -f image/Dockerfile.qhub-jupyterlab -t qhub-jupyterlab:$IMAGE_TAG image
+
+  dask-gateway:
+    name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Image'
+        uses: actions/checkout@master
+      - name: Build Image
+        env:
+          IMAGE_TAG: {{ '${{ github.sha }}' }}
+        run: |
+          docker build -f image/Dockerfile.dask-gateway -t qhub-dask-gateway:$IMAGE_TAG image
+
+  dask-worker:
+    name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Image'
+        uses: actions/checkout@master
+      - name: Build Image
+        env:
+          IMAGE_TAG: {{ '${{ github.sha }}' }}
+        run: |
+          docker build -f image/Dockerfile.dask-worker -t qhub-dask-worker:$IMAGE_TAG image

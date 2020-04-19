@@ -29,4 +29,4 @@ Adding `terraform-state` and `infastructure`
 
 ## Deployment
 
-Cluster is available at [jupyter.crowdsmart.quansight.services](https://jupyter.crowdsmart.quansight.services)
+
