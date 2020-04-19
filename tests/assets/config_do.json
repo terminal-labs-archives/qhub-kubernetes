@@ -10,19 +10,19 @@
         "kubernetes_version": "1.16.6-do.2",
         "node_groups": {
             "general": {
-                "instance": "s-1vcpu-2gb",
-                "min_nodes": 2,
-                "max_nodes": 2
+                "instance": "s-2vcpu-4gb",
+                "min_nodes": 1,
+                "max_nodes": 1
             },
             "user": {
-                "instance": "s-1vcpu-2gb",
-                "min_nodes": 2,
-                "max_nodes": 2
+                "instance": "s-2vcpu-4gb",
+                "min_nodes": 1,
+                "max_nodes": 4
             },
             "worker": {
-                "instance": "s-1vcpu-2gb",
-                "min_nodes": 0,
-                "max_nodes": 2
+                "instance": "s-2vcpu-4gb",
+                "min_nodes": 1,
+                "max_nodes": 4
             }
         }
     }
