@@ -16,7 +16,7 @@ auth:
 hub:
   extraConfig:
     01-jupyterlab: |
-      c.Spawner.cmd = ['conda', 'run', '-n', 'default', 'jupyter-labhub']
+      c.Spawner.cmd = ['jupyter-labhub']
 
 cull:
   enabled: true

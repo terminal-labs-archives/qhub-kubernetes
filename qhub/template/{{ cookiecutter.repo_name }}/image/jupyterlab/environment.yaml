@@ -14,6 +14,7 @@ jupyterhub
 nodejs
 nbconvert
 nbval
+dask_labextension
 
 # dask
 dask==2.14.0

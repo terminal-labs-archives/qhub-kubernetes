@@ -5,11 +5,6 @@ set -euo pipefail
 jupyter nbextension enable --py widgetsnbextension --sys-prefix
 jupyter serverextension enable --sys-prefix jupyter_server_proxy
 
-# sets up jupyterlab-git
-# lab extension will be built with jupyter lab build later
-pip install --no-cache-dir \
-    jupyterlab-git
-
 # install jupyterlab extensions
 jupyter labextension install --clean \
         dask-labextension \
