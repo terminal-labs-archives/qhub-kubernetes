@@ -8,6 +8,7 @@ on:
       - "image/**"
       - ".github/workflows/image.yaml"
 
+
 jobs:
   build:
     name:
@@ -30,15 +31,22 @@ jobs:
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           version: '270.0.0'
-          service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          service_account_key: {{ '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}' }}
       - name: 'Add GCP Credentials'
         run: |
           echo "$gcp_credentials" > gcp-infrastructure/account.json
           gcloud auth activate-service-account --key-file=gcp-infrastructure/account.json
         env:
-          gcp_credentials: ${{ secrets.gcp_credentials }}
+          gcp_credentials: {{ '${{ secrets.gcp_credentials }}' }}
       - run: |
           gcloud auth configure-docker
+{% elif cookiecutter.provider == "do" %}
+- name: Docker Login
+        run: |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: {{ '${{ secrets.docker_username }}' }}
+          DOCKER_PASSWORD: {{ '${{ secrets.docker_password }}' }}
 {% endif %}
       - name: Docker Build, Tag, and Push Image
         env:

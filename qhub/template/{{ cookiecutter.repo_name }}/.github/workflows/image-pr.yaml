@@ -17,6 +17,6 @@ jobs:
         uses: actions/checkout@master
       - name: Build Image
         env:
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: {{ '${{ github.sha }}' }}
         run: |
           docker build -t qhub:$IMAGE_TAG image
