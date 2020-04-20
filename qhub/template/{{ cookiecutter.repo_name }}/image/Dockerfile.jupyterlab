@@ -17,3 +17,22 @@ COPY jupyterlab /opt/jupyterlab
 RUN /opt/scripts/install-apt.sh                  /opt/jupyterlab/apt.txt \
     && /opt/scripts/install-conda-environment.sh /opt/jupyterlab/environment.yaml \
     && /opt/jupyterlab/postBuild
+
+# ========== regular user ===========
+ARG NB_USER="jovyan"
+# We assume only one user per container, so make it unique UID matches
+# GID
+ARG NB_UID="1000"
+
+RUN groupadd --gid ${NB_UID} ${NB_USER} && \
+    useradd \
+    --comment 'Jupyter container user' \
+    --create-home \
+    --no-log-init \
+    --shell /bin/bash \
+    --gid ${NB_UID} \
+    --uid ${NB_UID} \
+    ${NB_USER}
+
+USER ${NB_UID}
+WORKDIR /home/${NB_USER}

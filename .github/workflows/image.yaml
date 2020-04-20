@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "qhub/template/{{ cookiecutter.repo_name }}/image/**"
+      - ".github/workflows/image.yaml"
 
 jobs:
   jupyterlab:
