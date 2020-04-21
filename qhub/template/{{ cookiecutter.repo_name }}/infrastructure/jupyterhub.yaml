@@ -1,17 +1,4 @@
-auth:
-  type: github
-  github:
-    clientId: "<replace-me>"
-    clientSecret: "<replace-me>"
-    callbackUrl: "https://{{ cookiecutter.endpoint }}/hub/oauth_callback"
-  admin:
-    access: true
-    users:
-      - costrouc
-  whitelist:
-    users:
-      - dharhas
-      - anirrudh
+{{ cookiecutter.authentication | yamlify }}
 
 hub:
   extraConfig:
@@ -21,9 +8,9 @@ hub:
     customPodHook: |
       c.JupyterHub.template_paths = ['/usr/local/share/jupyterhub/custom_templates/']
       c.JupyterHub.template_vars = {
-          'pangeo_hub_title': 'QHub - ${{ cookiecutter.project_name }}',
+          'pangeo_hub_title': 'QHub - {{ cookiecutter.project_name }}',
           'pangeo_hub_subtitle': 'Autoscaling Compute Environment on Digital Ocean',
-          'pangeo_welcome': """Welcome to ${{ cookiecutter.endpoint }}. It is maintained by the <a href="http://quansight.com">Quansight staff</a>. The hub's configuration is stored in the github repository based on <a href="https://github.com/Quansight/qhub-kubernetes/">https://github.com/Quansight/qhub-kubernetes/</a>. To provide feedback and report any technical problems, please use the <a href="https://github.com/Quansight/qhub-kubernetes//issues">github issue tracker</a>."""
+          'pangeo_welcome': """Welcome to {{ cookiecutter.endpoint }}. It is maintained by the <a href="http://quansight.com">Quansight staff</a>. The hub's configuration is stored in the github repository based on <a href="https://github.com/Quansight/qhub-kubernetes/">https://github.com/Quansight/qhub-kubernetes/</a>. To provide feedback and report any technical problems, please use the <a href="https://github.com/Quansight/qhub-kubernetes//issues">github issue tracker</a>."""
       }
   extraVolumes:
     - name: custom-templates

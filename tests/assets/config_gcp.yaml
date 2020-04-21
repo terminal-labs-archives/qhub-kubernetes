@@ -1,0 +1,40 @@
+repo_name: gcp-deployment
+project_name: gcp-jupyterhub
+provider: gcp
+ci_cd: github-actions
+endpoint: "jupyter.gcp.qhub.dev"
+
+authentication:
+  auth:
+    type: github
+    github:
+      client_id: CLIENT_ID_REPLACE_ME
+      client_secret: CLIENT_SECRET_REPLACE_ME
+      oauth_callback_url: https://jupyter.do.qhub.dev/hub/oauth_callback
+    admin:
+      access: true
+      users:
+        - costrouc
+    whitelist:
+      users:
+        - dharhas
+
+google_cloud_platform:
+  project: test-test-test
+  region: us-central1
+  zone: us-central1-c
+  availability_zones: "[\"us-central1-c\"]"
+  kubernetes_version: "1.14.10-gke.31"
+  node_groups:
+    general:
+      instance: n1-standard-1
+      min_nodes: 2
+      max_nodes: 2
+    user:
+      instance: n1-standard-2
+      min_nodes: 0
+      max_nodes: 2
+    worker:
+      instance: n1-standard-2
+      min_nodes: 0
+      max_nodes: 5

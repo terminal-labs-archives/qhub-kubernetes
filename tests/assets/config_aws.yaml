@@ -1,0 +1,38 @@
+repo_name: aws-deployment
+project_name: aws-jupyterhub
+provider: aws
+ci_cd: github-actions
+endpoint: "jupyter.aws.qhub.dev"
+
+authentication:
+  auth:
+    type: github
+    github:
+      client_id: CLIENT_ID_REPLACE_ME
+      client_secret: CLIENT_SECRET_REPLACE_ME
+      oauth_callback_url: https://jupyter.do.qhub.dev/hub/oauth_callback
+    admin:
+      access: true
+      users:
+        - costrouc
+    whitelist:
+      users:
+        - dharhas
+
+amazon_web_services:
+  region: us-west-2
+  availability_zones: "[\"us-west-2a\", \"us-west-2b\"]"
+  kubernetes_version: "1.14"
+  node_groups:
+    general:
+      instance: "m5.large"
+      min_nodes: 1
+      max_nodes: 1
+    user:
+      instance: "m5.large"
+      min_nodes: 1
+      max_nodes: 2
+    worker:
+      instance: "m5.large"
+      min_nodes: 1
+      max_nodes: 2

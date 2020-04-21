@@ -1,6 +1,6 @@
 import pathlib
-import json
 
+import yaml
 from cookiecutter.main import cookiecutter
 
 
@@ -31,7 +31,7 @@ def render_template(input_directory, output_directory, config_filename=None):
             raise ValueError(f"cookiecutter configuration={filename} is not filename")
 
         with filename.open() as f:
-            config = json.load(f)
+            config = yaml.safe_load(f)
 
         cookiecutter(
             str(input_directory),

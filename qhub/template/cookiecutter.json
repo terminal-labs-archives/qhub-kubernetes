@@ -5,6 +5,8 @@
     "ci_cd": null,
     "endpoint": null,
 
+    "authentication": null,
+
     "digital_ocean": {
         "region": null,
         "kubernetes_version": null,
@@ -73,5 +75,7 @@
                 "max_nodes": null
             }
         }
-    }
+    },
+
+    "_extensions": ["qhub.jinja.YamlifyExtension"]
 }
