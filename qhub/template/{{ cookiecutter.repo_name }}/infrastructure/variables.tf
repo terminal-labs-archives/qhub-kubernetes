@@ -50,14 +50,26 @@ variable "endpoint" {
   default     = "{{ cookiecutter.endpoint }}"
 }
 
-variable "image" {
+variable "jupyterlab-image" {
   description = "Jupyterlab user image"
   type = object({
     name = string
     tag  = string
   })
   default = {
-    name = "quansight/digitalocean-jupyterhub-dev"
-    tag  = "5fe838bacde3398cc134a30625945705b620d59a"
+    name = "quansight/qhub-jupyterlab"
+    tag  = "8a810739aeca2a359c33f95b81655710cfd2eff2"
+  }
+}
+
+variable "dask-worker-image" {
+  description = "Dask worker image"
+  type = object({
+    name = string
+    tag  = string
+  })
+  default = {
+    name = "quansight/qhub-dask-worker"
+    tag  = "8a810739aeca2a359c33f95b81655710cfd2eff2"
   }
 }

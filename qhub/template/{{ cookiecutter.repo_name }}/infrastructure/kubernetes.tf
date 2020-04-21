@@ -80,10 +80,8 @@ module "qhub" {
 
   external-url = var.endpoint
 
-  user-image = {
-    name = var.image.name
-    tag  = var.image.tag
-  }
+  jupyterlab-image = var.jupyterlab-image
+  dask-worker-image = var.dask-worker-image
 
   general-node-group = local.node_groups.general
   user-node-group    = local.node_groups.user
