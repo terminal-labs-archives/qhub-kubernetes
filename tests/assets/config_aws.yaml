@@ -8,9 +8,9 @@ authentication:
   auth:
     type: github
     github:
-      client_id: CLIENT_ID_REPLACE_ME
-      client_secret: CLIENT_SECRET_REPLACE_ME
-      oauth_callback_url: https://jupyter.do.qhub.dev/hub/oauth_callback
+      clientId: CLIENT_ID_REPLACE_ME
+      clientSecret: CLIENT_SECRET_REPLACE_ME
+      callbackUrl: https://jupyter.do.qhub.dev/hub/oauth_callback
     admin:
       access: true
       users:

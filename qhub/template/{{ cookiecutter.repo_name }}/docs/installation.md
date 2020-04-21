@@ -93,7 +93,7 @@ follow the same terraform deployment steps.
 ```shell
 cd infrastructure
 terraform init
-terraform apply -target=module.kubernetes-initialization -target=module.kubernetes-ingress # reply yes
+terraform apply -target=module.kubernetes -target=module.kubernetes-initialization -target=module.kubernetes-ingress # reply yes
 ```
 
 Notice a pattern here with terraform deployments? `terraform init` +

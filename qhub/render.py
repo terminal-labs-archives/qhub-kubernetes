@@ -1,7 +1,10 @@
 import pathlib
+import collections
+import json
 
 import yaml
 from cookiecutter.main import cookiecutter
+from cookiecutter.generate import generate_files
 
 
 def render_default_template(output_directory, config_filename=None):
@@ -33,10 +36,12 @@ def render_template(input_directory, output_directory, config_filename=None):
         with filename.open() as f:
             config = yaml.safe_load(f)
 
-        cookiecutter(
-            str(input_directory),
-            no_input=True,
-            extra_context=config,
+        with (input_directory / "cookiecutter.json").open() as f:
+            config = collections.ChainMap(config, json.load(f))
+
+        generate_files(
+            repo_dir=str(input_directory),
+            context={"cookiecutter": config},
             output_dir=str(output_directory),
         )
     elif prompt_filename.is_file():

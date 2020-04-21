@@ -49,7 +49,7 @@ jobs:
           pip install .[test,dev]
       - name: QHub Build Digital Ocean Template
         run: |
-          qhub init -c tests/assets/config_do.json
+          qhub init -c tests/assets/config_do.yaml
       - name: Digital Ocean Artifact
         uses: actions/upload-artifact@v1
         with:
@@ -104,7 +104,7 @@ jobs:
           pip install .[test,dev]
       - name: QHub Build Amazon Web Services Template
         run: |
-          qhub init -c tests/assets/config_aws.json
+          qhub init -c tests/assets/config_aws.yaml
       - name: Amazon Web Services Artifact
         uses: actions/upload-artifact@v1
         with:
@@ -153,7 +153,7 @@ jobs:
           pip install .[test,dev]
       - name: QHub Build Google Cloud Platform Template
         run: |
-          qhub init -c tests/assets/config_gcp.json
+          qhub init -c tests/assets/config_gcp.yaml
       - name: Google Cloud Platform Artifact
         uses: actions/upload-artifact@v1
         with:

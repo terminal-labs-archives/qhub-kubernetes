@@ -23,6 +23,7 @@ in
 
       # python
       pythonPackages.cookiecutter
+      pythonPackages.pyyaml
       pythonPackages.pytest
       pythonPackages.black
       pythonPackages.flake8
