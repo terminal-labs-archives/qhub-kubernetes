@@ -50,6 +50,18 @@ variable "endpoint" {
   default     = "{{ cookiecutter.endpoint }}"
 }
 
+variable "jupyterhub-image" {
+  description = "Jupyterhub user image"
+  type = object({
+    name = string
+    tag  = string
+  })
+  default = {
+    name = "quansight/qhub-jupyterhub"
+    tag  = "8b6de8dc04f832ccf964027e1fcb839660c8c994"
+  }
+}
+
 variable "jupyterlab-image" {
   description = "Jupyterlab user image"
   type = object({
@@ -58,7 +70,7 @@ variable "jupyterlab-image" {
   })
   default = {
     name = "quansight/qhub-jupyterlab"
-    tag  = "8a810739aeca2a359c33f95b81655710cfd2eff2"
+    tag  = "8b6de8dc04f832ccf964027e1fcb839660c8c994"
   }
 }
 
@@ -70,6 +82,6 @@ variable "dask-worker-image" {
   })
   default = {
     name = "quansight/qhub-dask-worker"
-    tag  = "8a810739aeca2a359c33f95b81655710cfd2eff2"
+    tag  = "8b6de8dc04f832ccf964027e1fcb839660c8c994"
   }
 }

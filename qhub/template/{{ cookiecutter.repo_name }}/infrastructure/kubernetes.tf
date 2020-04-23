@@ -80,6 +80,7 @@ module "qhub" {
 
   external-url = var.endpoint
 
+  jupyterhub-image  = var.jupyterhub-image
   jupyterlab-image  = var.jupyterlab-image
   dask-worker-image = var.dask-worker-image
 
