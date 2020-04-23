@@ -7,6 +7,9 @@ terraform.tfstate.backup
 # python
 __pycache__
 
+# nix
+result
+
 # ignore deploments
 do-deployment
 aws-deployment
