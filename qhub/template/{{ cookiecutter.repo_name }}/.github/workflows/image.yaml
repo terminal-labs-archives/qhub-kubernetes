@@ -17,6 +17,7 @@ jobs:
       matrix:
         dockerfile:
           - jupyterlab
+          - jupyterhub
           - dask-gateway
           - dask-worker
     steps:

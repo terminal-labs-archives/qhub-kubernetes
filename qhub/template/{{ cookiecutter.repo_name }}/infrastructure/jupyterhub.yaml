@@ -12,19 +12,6 @@ hub:
           'pangeo_hub_subtitle': 'Autoscaling Compute Environment on Digital Ocean',
           'pangeo_welcome': """Welcome to {{ cookiecutter.endpoint }}. It is maintained by the <a href="http://quansight.com">Quansight staff</a>. The hub's configuration is stored in the github repository based on <a href="https://github.com/Quansight/qhub-kubernetes/">https://github.com/Quansight/qhub-kubernetes/</a>. To provide feedback and report any technical problems, please use the <a href="https://github.com/Quansight/qhub-kubernetes//issues">github issue tracker</a>."""
       }
-  extraVolumes:
-    - name: custom-templates
-      gitRepo:
-        repository: "https://github.com/Quansight/qhub-jupyterhub-theme.git"
-        revision: "53edc55d0bdd5944fb6dee2d10af90da8faf191d"
-  extraVolumeMounts:
-    - mountPath: /usr/local/share/jupyterhub/custom_templates
-      name: custom-templates
-      subPath: "qhub-jupyterhub-theme/templates"
-    - mountPath: /usr/local/share/jupyterhub/static/extra-assets
-      name: custom-templates
-      subPath: "qhub-jupyterhub-theme/extra-assets"
-
 
 singleuser:
   profileList:
