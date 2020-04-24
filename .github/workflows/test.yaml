@@ -58,13 +58,13 @@ jobs:
       - name: 'Terraform Format'
         uses: hashicorp/terraform-github-actions@master
         with:
-          tf_actions_version: 0.12.23
+          tf_actions_version: 0.12.24
           tf_actions_subcommand: 'fmt'
           tf_actions_working_dir: 'do-deployment/infrastructure'
       - name: 'Terraform Init'
         uses: hashicorp/terraform-github-actions@master
         with:
-          tf_actions_version: 0.12.23
+          tf_actions_version: 0.12.24
           tf_actions_subcommand: 'init'
           tf_actions_working_dir: 'do-deployment/infrastructure'
         env:
@@ -76,7 +76,7 @@ jobs:
       - name: 'Terraform Validate'
         uses: hashicorp/terraform-github-actions@master
         with:
-          tf_actions_version: 0.12.23
+          tf_actions_version: 0.12.24
           tf_actions_subcommand: 'validate'
           tf_actions_working_dir: 'do-deployment/infrastructure'
           tf_actions_comment: true
@@ -113,13 +113,13 @@ jobs:
       - name: 'Terraform Format'
         uses: hashicorp/terraform-github-actions@master
         with:
-          tf_actions_version: 0.12.23
+          tf_actions_version: 0.12.24
           tf_actions_subcommand: 'fmt'
           tf_actions_working_dir: 'aws-deployment/infrastructure'
       - name: 'Terraform Init'
         uses: hashicorp/terraform-github-actions@master
         with:
-          tf_actions_version: 0.12.23
+          tf_actions_version: 0.12.24
           tf_actions_subcommand: 'init'
           tf_actions_working_dir: 'aws-deployment/infrastructure'
         env:
@@ -128,7 +128,7 @@ jobs:
       - name: 'Terraform Validate'
         uses: hashicorp/terraform-github-actions@master
         with:
-          tf_actions_version: 0.12.23
+          tf_actions_version: 0.12.24
           tf_actions_subcommand: 'validate'
           tf_actions_working_dir: 'aws-deployment/infrastructure'
           tf_actions_comment: true
