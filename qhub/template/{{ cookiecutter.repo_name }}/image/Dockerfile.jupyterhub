@@ -13,8 +13,8 @@ RUN cd /opt && \
     && tar -xf theme.tar.gz \
     && mkdir -p /usr/local/share/jupyterhub/custom_templates \
     && mkdir -p /usr/local/share/jupyterhub/extra-assets \
-    && cp -r "/opt/${THEME_REPO}-${THEME_REV}/templates" /usr/local/share/jupyterhub/custom_templates \
-    && cp -r "/opt/${THEME_REPO}-${THEME_REV}/extra-assets" /usr/local/share/jupyterhub/extra-assets \
+    && cp -r "/opt/${THEME_REPO}-${THEME_REV}/templates/." /usr/local/share/jupyterhub/custom_templates/ \
+    && cp -r "/opt/${THEME_REPO}-${THEME_REV}/extra-assets/." /usr/local/share/jupyterhub/extra-assets/ \
     && rm -rf "/opt/theme.tar.gz" "/opt/${THEME_REPO}-${THEME_REV}"
 
 
